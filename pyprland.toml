@@ -1,0 +1,61 @@
+# ╔══════════════════════════════════════════════════════════════════════════╗
+# ║                          PYPRLAND CONFIGURATION                          ║
+# ╚══════════════════════════════════════════════════════════════════════════╝
+# Python plugin system for Hyprland.
+# See: https://github.com/hyprland-community/pyprland
+#
+# Install: paru -S pyprland (or pip install pyprland)
+# Docs: https://hyprland-community.github.io/pyprland/
+
+[pyprland]
+plugins = [
+    "scratchpads",
+    "magnify",
+    "expose",
+]
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Scratchpads
+# ─────────────────────────────────────────────────────────────────────────────
+# Named scratchpads with animations and auto-hide.
+# Toggle with: pypr toggle <name>
+
+[scratchpads.term]
+command = "wezterm start --class scratchpad-term"
+class = "scratchpad-term"
+animation = "fromTop"
+size = "80% 70%"
+margin = 50
+
+[scratchpads.files]
+command = "wezterm start --class scratchpad-files -- spf"
+class = "scratchpad-files"
+animation = "fromBottom"
+size = "80% 70%"
+margin = 50
+
+[scratchpads.volume]
+command = "pavucontrol"
+class = "org.pulseaudio.pavucontrol"
+animation = "fromRight"
+size = "40% 80%"
+margin = 50
+lazy = true
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Magnify
+# ─────────────────────────────────────────────────────────────────────────────
+# Screen magnifier. Toggle with: pypr zoom
+# Useful for presentations or accessibility.
+
+[magnify]
+factor = 2
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Expose
+# ─────────────────────────────────────────────────────────────────────────────
+# Show all windows overview. Toggle with: pypr expose
+# Similar to macOS Mission Control.
+
+[expose]
+include_special = false
