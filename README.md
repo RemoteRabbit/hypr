@@ -165,4 +165,4 @@ VRR/G-Sync is enabled via environment variables.
 
 ## License
 
-[MIT](LICENSE)
+[GPL-3.0 license](LICENSE)
