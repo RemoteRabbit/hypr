@@ -21,18 +21,18 @@ plugins = [
 # Toggle with: pypr toggle <name>
 
 [scratchpads.term]
-command = "wezterm start --class scratchpad-term"
-class = "scratchpad-term"
-animation = "fromTop"
-size = "80% 70%"
-margin = 50
-
-[scratchpads.files]
-command = "wezterm start --class scratchpad-files -- spf"
-class = "scratchpad-files"
+command = "wezterm start --class scratchpad_term"
+class = "scratchpad_term"
 animation = "fromBottom"
-size = "80% 70%"
-margin = 50
+size = "80% 60%"
+lazy = true
+
+# [scratchpads.files]
+# command = "wezterm start --class scratchpad_files -- spf"
+# class = "scratchpad_files"
+# animation = "fromBottom"
+# size = "80% 70%"
+# margin = 50
 
 [scratchpads.volume]
 command = "pavucontrol"
