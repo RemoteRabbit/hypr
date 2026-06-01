@@ -6,7 +6,7 @@ Lua config API, managed by [uwsm](https://github.com/Vladimir-csp/uwsm).
 
 ## Structure
 
-```
+```text
 ~/.config/hypr/
 ├── hyprland.lua        # entry point, requires every module
 ├── appearance.lua      # general, decorations, animations, misc
