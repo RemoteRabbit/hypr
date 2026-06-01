@@ -1,0 +1,73 @@
+# Pre-commit hooks for this Hyprland config repo.
+# Install with: pre-commit install
+# Run manually:  pre-commit run --all-files
+# Update pins:   pre-commit autoupdate
+
+repos:
+  # File hygiene
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: '\.md$'  # respect .editorconfig: md keeps trailing spaces
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+        args: [--fix=lf]
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: [--maxkb=500]
+      - id: check-yaml
+      - id: check-toml
+      - id: check-executables-have-shebangs
+      - id: check-shebang-scripts-are-executable
+
+  # Shell: shellcheck + shfmt for the scripts/ dir
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.10.0.1
+    hooks:
+      - id: shellcheck
+
+  - repo: https://github.com/scop/pre-commit-shfmt
+    rev: v3.10.0-2
+    hooks:
+      - id: shfmt
+        args: [-i, "2", -ci, -sr, -w]  # 2-space indent, case indent, redirect spacing, write in-place
+
+  # Secret scanning
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.21.2
+    hooks:
+      - id: gitleaks
+
+  # Typo detection
+  - repo: https://github.com/crate-ci/typos
+    rev: v1.28.4
+    hooks:
+      - id: typos
+        args: [--write-changes, --force-exclude]
+        # Config in .typos.toml at repo root.
+
+  # Local hooks (tools installed on the system: stylua, luacheck, scripts/)
+  - repo: local
+    hooks:
+      - id: stylua
+        name: stylua
+        description: Format Lua with system stylua (reads .stylua.toml)
+        entry: stylua
+        language: system
+        files: '\.lua$'
+
+      - id: luacheck
+        name: luacheck
+        description: Lint Lua with system luacheck (reads .luacheckrc)
+        entry: luacheck
+        language: system
+        files: '\.lua$'
+
+      - id: autodoc-readme
+        name: Regenerate README autodoc tables
+        description: Rebuilds marker-delimited tables in README.md from the Lua config.
+        entry: scripts/update-readme.sh
+        language: script
+        files: '\.lua$|^README\.md$|^scripts/(gen-docs\.lua|update-readme\.sh)$'
+        pass_filenames: false
